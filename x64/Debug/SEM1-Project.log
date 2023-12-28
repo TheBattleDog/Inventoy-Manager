@@ -1,0 +1,23 @@
+﻿  dep.c
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(51,12): warning C4013: 'put_Menu' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(57,10): warning C4013: 'add_items' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(58,10): warning C4013: 'update_Quantity' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(59,10): warning C4013: 'delete_Items' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(60,10): warning C4013: 'view_Inventory' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(61,10): warning C4013: 'generate_Reports' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(62,10): warning C4013: 'search_Items' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(63,10): warning C4013: 'exit_App' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(136,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(208,10): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(216,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  file_handling.c
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\file_handling.c(14,6): warning C4013: 'access' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\file_handling.c(22,15): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\file_handling.c(33,4): warning C4013: 'exit' undefined; assuming extern returning int
+  main.c
+  menu.c
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(30,10): warning C4013: '_getch' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(109,2): warning C4013: 'exit' undefined; assuming extern returning int
+  Generating Code...
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(50): warning C4715: 'put_Menu': not all control paths return a value
+  SEM1-Project.vcxproj -> C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\x64\Debug\SEM1-Project.exe
