@@ -2,46 +2,66 @@
 #include <conio.h>
 #include "file_handling.h"
 #include "dep.h"
+#include "menu.h"
 
 #ifndef F_OK
 #define F_OK 0 
 #endif
 
-void get_File_Data(const char* file_name, char master_password[100])
+extern struct Product products[MAX_LENGTH];
+
+
+void get_File_Data(const char* file_name, char data[MAX_LENGTH])
 {
-	FILE* fmaster_password;
+	FILE* fileptr;
 	int byte_read;
 	if (access(file_name, F_OK) != 0)
 	{
-		first_Init(master_password);
-		decrypt(master_password);
+		first_Init(data);
 	}
 	else
 	{
-		fmaster_password = open_File(file_name, "rb");
-		byte_read = fread(master_password, sizeof(char), sizeof(master_password), fmaster_password);
+		fileptr = open_File(file_name, "rb");
+		byte_read = fread(data, sizeof(char), MAX_LENGTH, fileptr);
 		if (byte_read > 0)
 		{
-			master_password[byte_read] = '\0';
-			decrypt(master_password);
-			fclose(fmaster_password);
+			data[byte_read] = '\0';
+			fclose(fileptr);
 		}
 		else
 		{
 			printf("ERROR READING FILE");
-			fclose(fmaster_password);
+			fclose(fileptr);
 			getch();
 			exit(1);
 		}
-
 	}
 }
 
-FILE* create_File(const char* file_name, const char* for_what)
+void load_Inventory_Data(const char* file_name)
+{
+	FILE* fileptr;
+	int byte_read;
+	fileptr = open_File(file_name, "rb");
+	byte_read = fread(products, sizeof(struct Product), MAX_LENGTH, fileptr);
+	if (byte_read > 0)
+	{
+		fclose(fileptr);
+	}
+	else
+	{
+		printf("ERROR READING FILE");
+		fclose(fileptr);
+		getch();
+		exit(1);
+	}
+}
+
+void create_File(const char* file_name)
 {
 	FILE* new_file;
 
-	new_file = fopen(file_name, for_what);
+	new_file = fopen(file_name, "wb");
 
 	if (new_file == NULL)
 	{
@@ -50,8 +70,6 @@ FILE* create_File(const char* file_name, const char* for_what)
 		getch();
 		exit(1);
 	}
-
-	return new_file;
 }
 
 FILE* open_File(const char* file_name, const char* for_what)
@@ -67,6 +85,7 @@ FILE* open_File(const char* file_name, const char* for_what)
 	{
 		printf("Unable to open %s!!!\n\
 				Press any button to exit...", file_name);
+		getch();
 		exit(1);
 	}
 
@@ -76,8 +95,9 @@ FILE* open_File(const char* file_name, const char* for_what)
 void write_to_New_File(char* file_name, char* file_input)
 {
 	FILE* fmaster_password;
-	fmaster_password = create_File(file_name, "wb");
+	create_File(file_name);
+	fmaster_password = open_File(file_name, "wb");
 
-	fprintf(fmaster_password, "%s", file_input);
+	fwrite(file_input, sizeof(file_input[0]), sizeof(file_input), fmaster_password);
 	fclose(fmaster_password);
 }

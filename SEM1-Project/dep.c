@@ -8,22 +8,22 @@
 #include "dep.h"
 #include "file_handling.h"
 
+extern struct Product products[MAX_LENGTH];
+
 BOOL authenticate_User()
 {
-	char ui_master_password[PASS_SIZE] = { "" }; // ui - user input
-	char stored_master_password[PASS_SIZE] = { "" };
-	const char* file_name = "Pass.bin";
+	char ui_master_password[MAX_LENGTH] = { "" }; // ui - user input
+	char stored_master_password[MAX_LENGTH] = { "" };
 	static int count = 0;
 
-	get_File_Data(file_name, stored_master_password);
+	get_File_Data(PASS_FILENAME, stored_master_password);
+	decrypt(stored_master_password);
 	clear_scr();
 
 	print_Heading("INVENTORY MANAGEMENT SYSTEM");
 
 	if (count > 4)
-	{
 		printf("STOP... GO GET SOME HELP\n\n");
-	}
 	else if (count > 0)
 		printf("You are kinda sus mate... ReEnter the Password...\n");
 
@@ -74,12 +74,12 @@ void clear_scr()
 	printf("\033[2J\033[H");
 }
 
-void get_password(char password[PASS_SIZE])
+void get_password(char password[MAX_LENGTH])
 {
 	int i = 0;
 	char input;
 
-	while (i < PASS_SIZE)
+	while (i < MAX_LENGTH)
 	{
 		input = getch();
 
@@ -135,11 +135,25 @@ int generate_Rand(int min_range, int max_range)
 	return ((rand() % (max_range - min_range + 1)) + min_range);
 }
 
+void load_data()
+{
 
-void prompt_User(const char* str)
+}
+
+
+void prompt_User(const char* format_str, ...)
 {
 	fflush(stdin);
-	printf("\n%s >> ", str);
+	va_list args;
+	va_start(args, format_str);
+
+	char sformat[120];
+	strcpy(sformat, format_str);
+	strcat(sformat, " >> ");
+
+	vprintf(sformat, args);
+
+	va_end(args);
 }
 
 void print_Heading(const char* heading)
@@ -156,12 +170,13 @@ void print_Heading(const char* heading)
 	puts("\n\n");
 }
 
-void first_Init(char master_password[PASS_SIZE])
+void first_Init(char master_password[MAX_LENGTH])
 {
-	char master_password_re_enter[100] = { "" };
+	char master_password_re_enter[MAX_LENGTH] = { "" };
 
-	while (1)
+	while (TRUE)
 	{
+		print_Heading("Dependencies not found, enter new login credentials.");
 		prompt_User("Set a Password to Login");
 		get_password(master_password);
 		prompt_User("Re-Enter the Password");
@@ -171,16 +186,17 @@ void first_Init(char master_password[PASS_SIZE])
 		{
 			printf("\n\nThe password does not match!!\n\
 					Press any key to reenter the password...");
+			getch();
 		}
 		else
 		{
 			break;
-			getch();
 		}
 	}
 
 	encrypt(master_password, 0, 0);
-	write_to_New_File("Pass.bin", master_password);
+	write_to_New_File(PASS_FILENAME, master_password);
+	create_File(DATA_FILENAME, "wb");
 }
 
 void encrypt(char* message, int shift, int is_decrypt)

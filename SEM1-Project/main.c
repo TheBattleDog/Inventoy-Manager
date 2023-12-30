@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dep.h"
+#include "file_handling.h"
+#include "menu.h"
 
-char gMaster_password[100];
-
+struct Product products[MAX_LENGTH];
 
 int main()
 {
@@ -11,7 +12,10 @@ int main()
 	while (TRUE)
 	{
 		if (authenticate_User())
+		{
+			load_data();
 			get_Inventory();
+		}
 	}
 
 	return 0;

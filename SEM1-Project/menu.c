@@ -3,6 +3,8 @@
 #include "dep.h"
 #include "file_handling.h"
 #include "menu.h"
+
+extern struct Product products[MAX_LENGTH];
 int put_Menu(const char* items[], int size)
 {
 	int i;
@@ -51,20 +53,17 @@ int put_Menu(const char* items[], int size)
 
 void add_items()
 {
-	char product_name[100];
-	char product_price[11];
-	char product_code[100];
-	char product_stock[100];
-
 	prompt_User("Enter the product code");
-	scanf("%10[^\n]", product_name);
+	scanf("%d", &products[0].code);
 
-	prompt_User("Enter the name of the item");
-	scanf("%10[^\n]", product_price);
-	prompt_User("Enter the name of the item");
-	scanf("%10[^\n]", product_name);
-	prompt_User("Enter the name of the item");
-	scanf("%10[^\n]", product_name);
+	prompt_User("Enter the name of the item with product code %d", products[0].code);
+	scanf("%10[^\n]", &products[0].name);
+
+	prompt_User("Enter the price of %s", products[0].name);
+	scanf("%lf", &products[0].price);
+
+	prompt_User("Enter the available stock for %s >> ", products[0].name);
+	scanf("%d", &products[0].stock);
 
 
 	get_Inventory();
