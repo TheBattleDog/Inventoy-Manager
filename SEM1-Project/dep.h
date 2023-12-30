@@ -22,17 +22,20 @@
 
 BOOL authenticate_User();
 
-void prompt_User(const char* format_str, ...);
-void print_Heading(const char* heading);
-void first_Init(char master_password[MAX_LENGTH]);
-void encrypt(char* message, int shift, int is_decrypt); // Third parameter is used to check if the function is called from decrypt function. Set it to 1 only when calling from decrypt function.
-void decrypt(char* message);
-void get_Inventory();
+
 void clear_scr();
+void delay(int milliseconds);
+void decrypt(char* message);
+void encrypt(char* message, int shift, int is_decrypt); // Third parameter is used to check if the function is called from decrypt function. Set it to 1 only when calling from decrypt function.
+void first_Init(char master_password[MAX_LENGTH]);
+int generate_Rand(int min_range, int max_range);
+void get_Inventory();
+void init_Products();
+void print_Heading(const char* heading);
+void prompt_User(const char* format_str, ...);
 void get_password(char password[MAX_LENGTH]);
+
+
 int get_Ascii(int num);
 int to_Num(char ch);
-void delay(int milliseconds);
-int generate_Rand(int min_range, int max_range);
-void load_data();
 #endif

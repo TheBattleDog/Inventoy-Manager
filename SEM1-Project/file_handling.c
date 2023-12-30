@@ -8,7 +8,9 @@
 #define F_OK 0 
 #endif
 
-extern struct Product products[MAX_LENGTH];
+extern struct Product gProducts[MAX_LENGTH];
+extern int gCurrent_product_selected;
+extern int gProduct_size;
 
 
 void get_File_Data(const char* file_name, char data[MAX_LENGTH])
@@ -38,23 +40,33 @@ void get_File_Data(const char* file_name, char data[MAX_LENGTH])
 	}
 }
 
-void load_Inventory_Data(const char* file_name)
+void load_Inventory_Data()
 {
 	FILE* fileptr;
 	int byte_read;
-	fileptr = open_File(file_name, "rb");
-	byte_read = fread(products, sizeof(struct Product), MAX_LENGTH, fileptr);
-	if (byte_read > 0)
+	int i;
+	fileptr = open_File(DATA_FILENAME, "rb");
+	byte_read = fread(gProducts, sizeof(struct Product), MAX_LENGTH, fileptr);
+	
+	if (ferror(fileptr))
 	{
-		fclose(fileptr);
-	}
-	else
-	{
-		printf("ERROR READING FILE");
+		perror("ERROR READING FILE");
 		fclose(fileptr);
 		getch();
 		exit(1);
 	}
+
+	fclose(fileptr);
+
+	for (i = 0, gProduct_size = 0; gProducts[i].price != -1; i++, gProduct_size++);
+}
+
+void update_Inventory_Data()
+{
+	FILE* fileptr = open_File(DATA_FILENAME, "wb");
+
+	fwrite(gProducts, sizeof(struct Product), MAX_LENGTH, fileptr);
+	fclose(fileptr);
 }
 
 void create_File(const char* file_name)
@@ -70,6 +82,7 @@ void create_File(const char* file_name)
 		getch();
 		exit(1);
 	}
+	fclose(new_file);
 }
 
 FILE* open_File(const char* file_name, const char* for_what)
@@ -88,16 +101,15 @@ FILE* open_File(const char* file_name, const char* for_what)
 		getch();
 		exit(1);
 	}
-
 	return fileptr;
 }
 
-void write_to_New_File(char* file_name, char* file_input)
+void write_to_File(char* file_name, char* file_input)
 {
-	FILE* fmaster_password;
+	FILE* fileptr;
 	create_File(file_name);
-	fmaster_password = open_File(file_name, "wb");
+	fileptr = open_File(file_name, "wb");
 
-	fwrite(file_input, sizeof(file_input[0]), sizeof(file_input), fmaster_password);
-	fclose(fmaster_password);
+	fwrite(file_input, sizeof(file_input[0]), sizeof(file_input), fileptr);
+	fclose(fileptr);
 }

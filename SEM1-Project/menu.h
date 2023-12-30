@@ -1,5 +1,6 @@
 #ifndef _MENU_
 #define _MENU_
+#include "dep.h"
 
 struct Product
 {
@@ -17,4 +18,7 @@ void view_Inventory();
 void generate_Reports();
 void search_Items();
 void exit_App();
+void table_view(int start, int end, BOOL heading);
+
+BOOL valid_Inputs(struct Product prdct);
 #endif // MENU

@@ -5,10 +5,14 @@
 #include <time.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include "dep.h"
 #include "file_handling.h"
+#include "menu.h"
 
-extern struct Product products[MAX_LENGTH];
+extern struct Product gProducts[MAX_LENGTH];
+extern int gCurrent_product_selected;
+extern int gProduct_size;
 
 BOOL authenticate_User()
 {
@@ -18,6 +22,7 @@ BOOL authenticate_User()
 
 	get_File_Data(PASS_FILENAME, stored_master_password);
 	decrypt(stored_master_password);
+	load_Inventory_Data(DATA_FILENAME);
 	clear_scr();
 
 	print_Heading("INVENTORY MANAGEMENT SYSTEM");
@@ -58,15 +63,27 @@ void get_Inventory()
 
 	switch (sel)
 	{
-	case 0: add_items();
-	case 1: update_Quantity();
-	case 2: delete_Items();
-	case 3: view_Inventory();
-	case 4: generate_Reports();
-	case 5: search_Items();
-	case 6: exit_App();
+	case 0: add_items(); break;
+	case 1: update_Quantity(); break;
+	case 2: delete_Items(); break;
+	case 3: view_Inventory(); break;
+	case 4: generate_Reports(); break;
+	case 5: search_Items(); break;
+	case 6: exit_App(); break;
 	}
 	getch();
+}
+
+void init_Products()
+{
+	int i = 0;
+	for (i = 0; i < MAX_LENGTH; i++)
+	{
+		gProducts[i].code = -1;
+		gProducts[i].name[0] = '\0';
+		gProducts[i].price = -1;
+		gProducts[i].stock = -1;
+	}
 }
 
 void clear_scr()
@@ -106,11 +123,6 @@ void get_password(char password[MAX_LENGTH])
 	putchar('\n');
 }
 
-void clear_input()
-{
-	while (getch() != '\n' && getch() != EOF);
-}
-
 int get_Ascii(int num)
 {
 	return num + '0';
@@ -135,11 +147,6 @@ int generate_Rand(int min_range, int max_range)
 	return ((rand() % (max_range - min_range + 1)) + min_range);
 }
 
-void load_data()
-{
-
-}
-
 
 void prompt_User(const char* format_str, ...)
 {
@@ -154,6 +161,7 @@ void prompt_User(const char* format_str, ...)
 	vprintf(sformat, args);
 
 	va_end(args);
+	fflush(stdin);
 }
 
 void print_Heading(const char* heading)
@@ -195,8 +203,8 @@ void first_Init(char master_password[MAX_LENGTH])
 	}
 
 	encrypt(master_password, 0, 0);
-	write_to_New_File(PASS_FILENAME, master_password);
-	create_File(DATA_FILENAME, "wb");
+	write_to_File(PASS_FILENAME, master_password);
+	create_File(DATA_FILENAME);
 }
 
 void encrypt(char* message, int shift, int is_decrypt)
@@ -240,7 +248,7 @@ void encrypt(char* message, int shift, int is_decrypt)
 	if (!is_decrypt)
 	{
 		size = strlen(message);
-		message[size] = shift + '0'; // Number to character conversion
+		message[size] = get_Ascii(shift);
 		message[size + 1] = '\0';
 	}
 }
@@ -248,7 +256,7 @@ void encrypt(char* message, int shift, int is_decrypt)
 void decrypt(char* message)
 {
 	int size = strlen(message);
-	int shift = message[size - 1] - '0';
+	int shift = to_Num(message[size - 1]);
 	message[--size] = '\0';
 	encrypt(message, -shift, 1);
 }

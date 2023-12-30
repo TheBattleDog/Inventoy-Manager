@@ -4,7 +4,10 @@
 #include "file_handling.h"
 #include "menu.h"
 
-extern struct Product products[MAX_LENGTH];
+extern struct Product gProducts[MAX_LENGTH];
+extern int gCurrent_product_selected;
+extern int gProduct_size;
+
 int put_Menu(const char* items[], int size)
 {
 	int i;
@@ -53,25 +56,33 @@ int put_Menu(const char* items[], int size)
 
 void add_items()
 {
-	prompt_User("Enter the product code");
-	scanf("%d", &products[0].code);
 
-	prompt_User("Enter the name of the item with product code %d", products[0].code);
-	scanf("%10[^\n]", &products[0].name);
+	do 
+	{
+		prompt_User("Enter the product code");
+		scanf("%d", &gProducts[gProduct_size].code);
 
-	prompt_User("Enter the price of %s", products[0].name);
-	scanf("%lf", &products[0].price);
+		prompt_User("Enter the name of the item with product code %d", gProducts[gProduct_size].code);
+		scanf(" %99[^\n]", gProducts[gProduct_size].name);
 
-	prompt_User("Enter the available stock for %s >> ", products[0].name);
-	scanf("%d", &products[0].stock);
+		prompt_User("Enter the price of %s", gProducts[gProduct_size].name);
+		scanf("%lf", &gProducts[gProduct_size].price);
 
+		prompt_User("Enter the available stock for %s >> ", gProducts[gProduct_size].name);
+		scanf("%d", &gProducts[gProduct_size].stock);
+	} while (!valid_Inputs(gProducts[gProduct_size]));
+
+	printf("\n\nNew item added Successfully!!");
+	++gProduct_size;
+
+	update_Inventory_Data();
 
 	get_Inventory();
 }
 
 void update_Quantity()
 {
-	//print_Heading("INVENTORY MANAGEMENT SYSTEM");
+	print_Heading("INVENTORY MANAGEMENT SYSTEM");
 	printf("Update Quantity Selected\n\nPress any Key to go back...");
 	getch();
 	get_Inventory();
@@ -88,7 +99,12 @@ void delete_Items()
 void view_Inventory()
 {
 	print_Heading("INVENTORY MANAGEMENT SYSTEM");
-	printf("View Inventory Selected\n\nPress any Key to go back...");
+	int i;
+
+	for (i = 0; i < gProduct_size; i++)
+	{
+		
+	}
 	getch();
 	get_Inventory();
 }
@@ -119,4 +135,9 @@ void exit_App()
 		delay(100);
 	}
 	exit(1);
+}
+
+BOOL valid_Inputs(struct Product prdct)
+{
+	return !(prdct.code < 0 || prdct.price < 0 || prdct.stock < 0 || prdct.name[0] == '\0');
 }

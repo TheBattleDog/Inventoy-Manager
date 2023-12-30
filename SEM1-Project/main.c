@@ -4,16 +4,18 @@
 #include "file_handling.h"
 #include "menu.h"
 
-struct Product products[MAX_LENGTH];
+struct Product gProducts[MAX_LENGTH];
+int gCurrent_product_selected = 0;
+int gProduct_size = MAX_LENGTH;
 
 int main()
 {
+	init_Products();
 	print_Heading("INVENTORY MANAGEMENT SYSTEM");
 	while (TRUE)
 	{
 		if (authenticate_User())
 		{
-			load_data();
 			get_Inventory();
 		}
 	}
