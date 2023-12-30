@@ -1,18 +1,5 @@
-﻿  dep.c
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(145,8): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(170,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(250,10): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\dep.c(258,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  file_handling.c
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\file_handling.c(20,6): warning C4013: 'access' undefined; assuming extern returning int
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\file_handling.c(27,15): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\file_handling.c(38,4): warning C4013: 'exit' undefined; assuming extern returning int
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\file_handling.c(49,14): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  main.c
-  menu.c
+﻿  menu.c
 C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(35,10): warning C4013: '_getch' undefined; assuming extern returning int
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(66,9): warning C4477: 'scanf' : format string '%99[^\n]' requires an argument of type 'char *', but variadic argument 1 has type 'int *'
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(137,2): warning C4013: 'exit' undefined; assuming extern returning int
-  Generating Code...
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(188,2): warning C4013: 'exit' undefined; assuming extern returning int
 C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(55): warning C4715: 'put_Menu': not all control paths return a value
   SEM1-Project.vcxproj -> C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\x64\Debug\SEM1-Project.exe

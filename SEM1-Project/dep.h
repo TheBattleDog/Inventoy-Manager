@@ -33,9 +33,10 @@ void get_Inventory();
 void init_Products();
 void print_Heading(const char* heading);
 void prompt_User(const char* format_str, ...);
-void get_password(char password[MAX_LENGTH]);
+void get_Password(char password[MAX_LENGTH]);
+void success_message(const char* message);
 
-
+int search(); // To be implemented
 int get_Ascii(int num);
 int to_Num(char ch);
 #endif

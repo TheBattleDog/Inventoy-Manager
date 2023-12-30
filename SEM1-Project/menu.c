@@ -68,7 +68,7 @@ void add_items()
 		prompt_User("Enter the price of %s", gProducts[gProduct_size].name);
 		scanf("%lf", &gProducts[gProduct_size].price);
 
-		prompt_User("Enter the available stock for %s >> ", gProducts[gProduct_size].name);
+		prompt_User("Enter the available stock for %s", gProducts[gProduct_size].name);
 		scanf("%d", &gProducts[gProduct_size].stock);
 	} while (!valid_Inputs(gProducts[gProduct_size]));
 
@@ -82,7 +82,6 @@ void add_items()
 
 void update_Quantity()
 {
-	print_Heading("INVENTORY MANAGEMENT SYSTEM");
 	printf("Update Quantity Selected\n\nPress any Key to go back...");
 	getch();
 	get_Inventory();
@@ -98,13 +97,10 @@ void delete_Items()
 
 void view_Inventory()
 {
-	print_Heading("INVENTORY MANAGEMENT SYSTEM");
-	int i;
 
-	for (i = 0; i < gProduct_size; i++)
-	{
-		
-	}
+	table_View(0, gProduct_size, TRUE);
+
+	printf("\n\n\nPress any button to go back...");
 	getch();
 	get_Inventory();
 }
@@ -125,6 +121,61 @@ void search_Items()
 	get_Inventory();
 }
 
+
+void change_Master_Password()
+{
+	char ui_master_password[MAX_LENGTH] = { '\0' };
+	char stored_master_password[MAX_LENGTH] = { '\0' };
+	get_File_Data(PASS_FILENAME, stored_master_password);
+	decrypt(stored_master_password);
+
+	int count = 0;
+
+	do 
+	{
+		if (count > 0)
+		{
+			print_Heading("\n\nWRONG PASSWORD... Are you the right guy?! -_-");
+		}
+		prompt_User("Enter the old password");
+		get_Password(ui_master_password);
+		count++;
+	} while (strcmp(ui_master_password, stored_master_password));
+
+	if (count > 4)
+	{
+		print_Heading("\n\nFinally...");
+	}
+	count = 0;
+
+	do {
+		if (count > 0) 
+		{
+			print_Heading("\n\nTHE PASSWORDS DOES NOT MATCH!!");
+		}
+		prompt_User("\n\nEnter the new password");
+		get_Password(ui_master_password);
+
+		prompt_User("\nReEnter the password");
+		get_Password(stored_master_password);
+		count++;
+	} while (strcmp(ui_master_password, stored_master_password));
+
+	encrypt(ui_master_password, 0, 0);
+	write_to_File(PASS_FILENAME, ui_master_password);
+
+	if (count > 4)
+	{
+		print_Heading("\n\nDamn finally... Thank You...");
+	}
+
+
+	print_Heading("\n\nThe PASSWORD has been successfully changed :)");
+	printf("Press any key to go back...");
+	getch();
+	get_Inventory();
+}
+
 void exit_App()
 {
 	char bye_message[] = "Bye Bye.......";
@@ -140,4 +191,19 @@ void exit_App()
 BOOL valid_Inputs(struct Product prdct)
 {
 	return !(prdct.code < 0 || prdct.price < 0 || prdct.stock < 0 || prdct.name[0] == '\0');
+}
+
+void table_View(int start, int end, BOOL heading)
+{
+	if (heading)
+	{
+		printf("%-20s %-20s %-20s %-20s\n", "PRODUCT CODE", "PRODUCT NAME", "PRICE", "STOCK");
+		printf("%-20s %-20s %-20s %-20s\n", "------------", "------------", "-----", "-----");
+	}
+	int i;
+	for (i = 0; i < gProduct_size; i++)
+	{
+		printf("%-20d %-20s %-20.2lf %-20d\n", gProducts[i].code, gProducts[i].name, gProducts[i].price, gProducts[i].stock);
+	}
+
 }

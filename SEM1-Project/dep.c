@@ -34,7 +34,7 @@ BOOL authenticate_User()
 
 
 	prompt_User("Password");
-	get_password(ui_master_password);
+	get_Password(ui_master_password);
 
 	if (strcmp(ui_master_password, stored_master_password))
 	{
@@ -52,7 +52,7 @@ BOOL authenticate_User()
 void get_Inventory()
 {
 	const char* menu_items[] = { "Add Items", "Update Quantity", "Delete Items",
-								 "View Inventory", "Generate Reports", "Search Items", "Exit" };
+								 "View Inventory", "Generate Reports", "Search Items", "Change Master Password","Exit"};
 	const int no_items = sizeof(menu_items) / sizeof(menu_items[0]);
 
 	int sel = put_Menu(menu_items, no_items);
@@ -69,7 +69,8 @@ void get_Inventory()
 	case 3: view_Inventory(); break;
 	case 4: generate_Reports(); break;
 	case 5: search_Items(); break;
-	case 6: exit_App(); break;
+	case 6: change_Master_Password(); break;
+	case 7: exit_App(); break;
 	}
 	getch();
 }
@@ -91,7 +92,7 @@ void clear_scr()
 	printf("\033[2J\033[H");
 }
 
-void get_password(char password[MAX_LENGTH])
+void get_Password(char password[MAX_LENGTH])
 {
 	int i = 0;
 	char input;
@@ -121,6 +122,10 @@ void get_password(char password[MAX_LENGTH])
 		}
 	}
 	putchar('\n');
+}
+
+void success_message(const char* message)
+{
 }
 
 int get_Ascii(int num)
@@ -186,14 +191,14 @@ void first_Init(char master_password[MAX_LENGTH])
 	{
 		print_Heading("Dependencies not found, enter new login credentials.");
 		prompt_User("Set a Password to Login");
-		get_password(master_password);
+		get_Password(master_password);
 		prompt_User("Re-Enter the Password");
-		get_password(master_password_re_enter);
+		get_Password(master_password_re_enter);
 
 		if (strcmp(master_password, master_password_re_enter))
 		{
 			printf("\n\nThe password does not match!!\n\
-					Press any key to reenter the password...");
+					Press any key to ReEnter the password...");
 			getch();
 		}
 		else

@@ -10,7 +10,7 @@ Build a basic inventory management system for a small store. Users can add items
 update quantities, delete items, and generate reports.
 
 
-Make table view display
+Make table view display - ✅
 
 Make a search engine
 
