@@ -170,8 +170,8 @@ void change_Master_Password()
 	}
 
 
-	print_Heading("\n\nThe PASSWORD has been successfully changed :)");
-	printf("Press any key to go back...");
+	print_Success_Message("The PASSWORD has been successfully changed :)", "\n\n");
+	printf("\n\nPress any key to go back...");
 	getch();
 	get_Inventory();
 }

@@ -34,7 +34,7 @@ void init_Products();
 void print_Heading(const char* heading);
 void prompt_User(const char* format_str, ...);
 void get_Password(char password[MAX_LENGTH]);
-void success_message(const char* message);
+void print_Success_Message(const char* message, const char* v_indent); // leave v_indent with an empty string if vertical indent it not needed.
 
 int search(); // To be implemented
 int get_Ascii(int num);

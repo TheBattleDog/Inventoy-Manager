@@ -124,8 +124,17 @@ void get_Password(char password[MAX_LENGTH])
 	putchar('\n');
 }
 
-void success_message(const char* message)
+void print_Success_Message(const char* message, const char* v_indent)
 {
+	int size = strlen(message);
+	int i;
+	printf("%s", v_indent);
+	for (i = 0; i < size; i++)
+	{
+		printf("%c\x1b[B\b-\x1b[A", message[i]); // Prints in two lines Two lines (\x1b[B) - used to go to down a line (\x1b[A) used to go up a line
+		delay(50);
+	}
+	printf("\n\n");
 }
 
 int get_Ascii(int num)

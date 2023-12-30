@@ -1,5 +1,1 @@
-﻿  menu.c
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(35,10): warning C4013: '_getch' undefined; assuming extern returning int
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(188,2): warning C4013: 'exit' undefined; assuming extern returning int
-C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(55): warning C4715: 'put_Menu': not all control paths return a value
-  SEM1-Project.vcxproj -> C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\x64\Debug\SEM1-Project.exe
+﻿  SEM1-Project.vcxproj -> C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\x64\Debug\SEM1-Project.exe
