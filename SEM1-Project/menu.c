@@ -51,15 +51,28 @@ int put_Menu(const char* items[], int size)
 
 void add_items()
 {
-	print_Heading("INVENTORY MANAGEMENT SYSTEM");
-	printf("Add Items Selected\n\nPress any Key to go back...");
-	getch();
+	char product_name[100];
+	char product_price[11];
+	char product_code[100];
+	char product_stock[100];
+
+	prompt_User("Enter the product code");
+	scanf("%10[^\n]", product_name);
+
+	prompt_User("Enter the name of the item");
+	scanf("%10[^\n]", product_price);
+	prompt_User("Enter the name of the item");
+	scanf("%10[^\n]", product_name);
+	prompt_User("Enter the name of the item");
+	scanf("%10[^\n]", product_name);
+
+
 	get_Inventory();
 }
 
 void update_Quantity()
 {
-	print_Heading("INVENTORY MANAGEMENT SYSTEM");
+	//print_Heading("INVENTORY MANAGEMENT SYSTEM");
 	printf("Update Quantity Selected\n\nPress any Key to go back...");
 	getch();
 	get_Inventory();
@@ -99,12 +112,12 @@ void search_Items()
 
 void exit_App()
 {
-	char bye_message[] = "Bye Bye...";
+	char bye_message[] = "Bye Bye.......";
 	int i;
 	for (i = 0; bye_message[i] != '\0'; i++)
 	{
 		putchar(bye_message[i]);
-		delay();
+		delay(100);
 	}
 	exit(1);
 }

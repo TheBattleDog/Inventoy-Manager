@@ -51,7 +51,9 @@ void get_Inventory()
 	const int no_items = sizeof(menu_items) / sizeof(menu_items[0]);
 
 	int sel = put_Menu(menu_items, no_items);
+
 	clear_scr();
+
 	print_Heading("INVENTORY MANAGEMENT SYSTEM");
 
 	switch (sel)
@@ -119,17 +121,18 @@ int to_Num(char ch)
 	return ch - '0';
 }
 
-void delay()
+void delay(int milliseconds)
 {
-#include <time.h>
 	clock_t start_time = clock();
 
+	while (clock() < (start_time + milliseconds));
+}
 
+int generate_Rand(int min_range, int max_range)
+{
+	srand(time(NULL));
 
-	do
-	{
-		//time(&current_time);
-	} while (clock() < (start_time + 200));
+	return ((rand() % (max_range - min_range + 1)) + min_range);
 }
 
 
@@ -185,14 +188,10 @@ void encrypt(char* message, int shift, int is_decrypt)
 	int i;
 	int ch;
 	int initial_ch;
-	int size = 0;
-	int min_range = 1;
-	int max_range = 9;
-
-	srand((unsigned int)time(NULL));
+	int size = 0;;
 
 	if (shift == 0)
-		shift = ((rand() % (max_range - min_range + 1)) + min_range);
+		shift = generate_Rand(3, 9);
 
 	for (i = 0; message[i] != '\0'; i++)
 	{

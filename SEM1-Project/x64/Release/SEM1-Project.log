@@ -1,0 +1,9 @@
+﻿  menu.c
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(30,10): warning C4013: '_getch' undefined; assuming extern returning int
+C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\SEM1-Project\menu.c(109,2): warning C4013: 'exit' undefined; assuming extern returning int
+  Generating code
+  3 of 31 functions ( 9.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    6 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  SEM1-Project.vcxproj -> C:\Users\krish\Documents\Programes\C\SEM 1 Project\SEM1-Project\x64\Release\SEM1-Project.exe

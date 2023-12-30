@@ -1,6 +1,14 @@
 #ifndef _MENU_
 #define _MENU_
 
+struct Product
+{
+	int code;
+	int name[100];
+	double price;
+	int stock;
+};
+
 int put_Menu(const char* items[], int size);
 void add_items();
 void update_Quantity();

@@ -30,5 +30,6 @@ void get_password(char password[PASS_SIZE]);
 void clear_input();
 int get_Ascii(int num);
 int to_Num(char ch);
-void delay();
+void delay(int milliseconds);
+int generate_Rand(int min_range, int max_range);
 #endif

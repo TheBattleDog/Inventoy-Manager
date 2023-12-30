@@ -24,6 +24,7 @@ void get_File_Data(const char* file_name, char master_password[100])
 		{
 			master_password[byte_read] = '\0';
 			decrypt(master_password);
+			fclose(fmaster_password);
 		}
 		else
 		{
@@ -74,9 +75,9 @@ FILE* open_File(const char* file_name, const char* for_what)
 
 void write_to_New_File(char* file_name, char* file_input)
 {
-	FILE* master_password;
-	master_password = create_File(file_name, "wb");
+	FILE* fmaster_password;
+	fmaster_password = create_File(file_name, "wb");
 
-	fprintf(master_password, "%s", file_input);
-	fclose(master_password);
+	fprintf(fmaster_password, "%s", file_input);
+	fclose(fmaster_password);
 }

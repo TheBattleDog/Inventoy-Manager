@@ -1,5 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "dep.h"
+
+char gMaster_password[100];
+
 
 int main()
 {
