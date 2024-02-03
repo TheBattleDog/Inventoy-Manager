@@ -14,7 +14,7 @@ extern struct Product gProducts[MAX_LENGTH];
 extern int gCurrent_product_selected;
 extern int gProduct_size;
 
-BOOL authenticate_User()
+bool authenticate_User()
 {
 	char ui_master_password[MAX_LENGTH] = { "" }; // ui - user input
 	char stored_master_password[MAX_LENGTH] = { "" };
@@ -39,12 +39,12 @@ BOOL authenticate_User()
 	if (strcmp(ui_master_password, stored_master_password))
 	{
 		count++;
-		return FALSE;
+		return false;
 	}
 	else
 	{
 		count = 0;
-		return TRUE;
+		return true;
 	}
 }
 
@@ -58,8 +58,6 @@ void get_Inventory()
 	int sel = put_Menu(menu_items, no_items);
 
 	clear_scr();
-
-	print_Heading("INVENTORY MANAGEMENT SYSTEM");
 
 	switch (sel)
 	{
@@ -124,7 +122,7 @@ void get_Password(char password[MAX_LENGTH])
 	putchar('\n');
 }
 
-void print_Success_Message(const char* message, const char* v_indent)
+void print_Success_Message(const char* message, const char* v_indent, int duration)
 {
 	int size = strlen(message);
 	int i;
@@ -132,9 +130,15 @@ void print_Success_Message(const char* message, const char* v_indent)
 	for (i = 0; i < size; i++)
 	{
 		printf("%c\x1b[B\b-\x1b[A", message[i]); // Prints in two lines Two lines (\x1b[B) - used to go to down a line (\x1b[A) used to go up a line
-		delay(50);
+		delay(duration);
 	}
 	printf("\n\n");
+}
+
+void clear_Input_Buffer()
+{
+	char c;
+	while ((c = getch()) != '\n' && c != EOF);
 }
 
 int get_Ascii(int num)
@@ -145,6 +149,13 @@ int get_Ascii(int num)
 int to_Num(char ch)
 {
 	return ch - '0';
+}
+
+int calc_Product_Char_count(struct Product prd)
+{
+	char prd_string[200];
+	sprintf(prd_string, "%d%s%.2lf%d", prd.code, prd.name, prd.price, prd.stock);
+	return strlen(prd_string);
 }
 
 void delay(int milliseconds)
@@ -196,7 +207,7 @@ void first_Init(char master_password[MAX_LENGTH])
 {
 	char master_password_re_enter[MAX_LENGTH] = { "" };
 
-	while (TRUE)
+	while (true)
 	{
 		print_Heading("Dependencies not found, enter new login credentials.");
 		prompt_User("Set a Password to Login");

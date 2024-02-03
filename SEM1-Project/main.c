@@ -12,7 +12,7 @@ int main()
 {
 	init_Products();
 	print_Heading("INVENTORY MANAGEMENT SYSTEM");
-	while (TRUE)
+	while (true)
 	{
 		if (authenticate_User())
 		{

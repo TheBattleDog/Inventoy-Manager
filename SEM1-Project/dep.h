@@ -1,9 +1,9 @@
 #ifndef DEP_H
 #define DEP_H
 
-#define BOOL int
-#define TRUE 1
-#define FALSE 0
+typedef int bool;
+#define true 1
+#define false 0
 #define MAX_LENGTH 100
 
 #define ENTER 13
@@ -20,7 +20,7 @@
 #define getch getch
 #endif
 
-BOOL authenticate_User();
+bool authenticate_User();
 
 
 void clear_scr();
@@ -34,9 +34,12 @@ void init_Products();
 void print_Heading(const char* heading);
 void prompt_User(const char* format_str, ...);
 void get_Password(char password[MAX_LENGTH]);
-void print_Success_Message(const char* message, const char* v_indent); // leave v_indent with an empty string if vertical indent it not needed.
+void print_Success_Message(const char* message, const char* v_indent, int duraiton); // leave v_indent with an empty string if vertical indent it not needed.
+void clear_Input_Buffer();
+
 
 int search(); // To be implemented
 int get_Ascii(int num);
 int to_Num(char ch);
+int calc_Product_Char_count(struct Product prd);
 #endif

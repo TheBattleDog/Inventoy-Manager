@@ -90,16 +90,15 @@ FILE* open_File(const char* file_name, const char* for_what)
 	FILE* fileptr;
 
 	fileptr = fopen(file_name, for_what);
+	if (fileptr == NULL)
+	{
+		printf("Unable to open %s!!!\nPress any button to exit...", file_name);
+		getch();
+		exit(1);
+	}
 	if (for_what[0] == 'r')
 	{
 		fseek(fileptr, 0, SEEK_SET);
-	}
-	if (fileptr == NULL)
-	{
-		printf("Unable to open %s!!!\n\
-				Press any button to exit...", file_name);
-		getch();
-		exit(1);
 	}
 	return fileptr;
 }
